@@ -3,22 +3,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors');
 const app = express();
-
-// Import Routes
-const productsRouter = require('./routes/product');
-const usersRouter = require('./routes/users');
-
-app.use('/api/products', productsRouter);
-app.use('/api/users', usersRouter);
+const cors = require('cors');
 
 app.use(
   cors({
     origin: '*',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+    methods: ['GET', 'PUT', 'DELETE', 'PATCH', 'POST'],
     allowedHeaders:
-      'Content-Type, Authorization, Origin, X-Requested-With,Accept',
+      'Content-Type, Authorization, Origin, X-Requested-With, Accept',
   })
 );
 
@@ -31,6 +24,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Import Routes
+const productsRouter = require('./routes/product');
+const ordersRouter = require('./routes/orders');
+
+app.use('/api/products', productsRouter);
+app.use('/api/orders', ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
