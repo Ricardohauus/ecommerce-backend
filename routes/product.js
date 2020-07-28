@@ -23,6 +23,7 @@ router.get('/', function (req, res) {
       'p.title as name',
       'p.price',
       'p.quantity',
+      'p.description',
       'p.image',
       'p.id',
     ])
@@ -57,6 +58,7 @@ router.get('/:id', function (req, res) {
         'p.title as name',
         'p.price',
         'p.quantity',
+        'p.description',
         'p.image',
         'p.images',
         'p.id',
@@ -107,6 +109,7 @@ router.get('/category/:catName', function (req, res) {
       'c.title as category',
       'p.title as name',
       'p.price',
+      'p.description',
       'p.quantity',
       'p.image',
       'p.id',
